@@ -1,3 +1,39 @@
+button {
+    border-radius: 2rem;
+    padding: 1rem 2rem;
+    text-align: center;
+    color: white;
+    background: rgba(80, 128, 107, 1);
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.2rem;
+    vertical-align: middle;
+    box-shadow: none;
+    outline: none; 
+    border: none; 
+}
+button:hover,
+button:focus,
+button:active {
+    opacity: 0.9;
+    cursor: pointer;
+}
+
+button.light {
+    color: rgba(80, 128, 107, 1);
+    background: rgba(86, 172, 89, 0.1);
+}
+
+button.icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(242, 242, 242, 1);
+    width: 40px;
+    height: 40px;
+    padding: 1rem;
+    color: rgba(26, 26, 26, 1);
+}
 
 input {
     border-radius: 6px;
