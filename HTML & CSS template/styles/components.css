@@ -1,0 +1,18 @@
+.notification {
+  height: 1.275rem;
+  width: 1.275rem;
+  background-color: rgba(80, 128, 107, 1);
+  border-radius: 100%;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 1);
+  font-weight: 500;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: -0.275rem;
+  right: -0.275rem;
+  left: auto;
+  bottom: auto;
+}

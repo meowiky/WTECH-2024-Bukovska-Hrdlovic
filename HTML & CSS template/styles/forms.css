@@ -1,0 +1,32 @@
+
+input {
+    border-radius: 6px;
+    border: 1px solid rgba(230, 230, 230, 1);
+    padding: 0.875rem 1rem;
+    font-size: 1rem;
+}
+input:focus,
+input:active {
+    border: 1px solid rgba(210, 210, 210, 1);
+    outline: none;
+}
+input.borderless {
+    border: none;
+}
+input.borderless:focus,
+input.borderless:active {
+    border: none;
+    outline: none;
+}
+.input-icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0.5rem;
+}
+.border-right .input-icon {
+    right: 1.5rem;
+}
+input::placeholder {
+    color: rgba(153, 153, 153, 1);
+}
