@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hello world</title>
+    <link rel="stylesheet" href="styles/generic.css" />
+    <link rel="stylesheet" href="styles/forms.css" />
+    <link rel="stylesheet" href="styles/navigation.css" />
+    <link rel="stylesheet" href="styles/components.css" />
+    <link rel="stylesheet" href="styles/products.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="pseudo-nav">
+        <a class="white-text">Sign up / Sign In</a>
+      </div>
+      <div class="main-nav">
+        <h1 class="logo inline">PLANTIES</h1>
+        <input type="checkbox" id="hamburger-checkbox" />
+        <label id="hamburger-label" for="hamburger-checkbox"
+          ><span id="hamburger-line"></span
+        ></label>
+        <nav>
+          <ul>
+            <a href="index.html"><li>Home</li></a>
+            <a href="products.html"><li>Products</li></a>
+          </ul>
+          <div id="menu-thing">
+            <div class="relative inline">
+              <input placeholder="Search" class="borderless" />
+              <img src="assets/search.svg" class="input-icon" />
+            </div>
+            <span class="divider"></span>
+            <div class="inline">
+              <div class="relative">
+                <img src="assets/shop.svg" id="shop-icon" />
+                <span class="notification">2</span>
+              </div>
+              <div>
+                <div class="light">Shopping cart:</div>
+                <div class="bold">$57.00</div>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <section class="green">
+      <h1><span class="green">Shop</span> by Category</h1>
+      <hr />
+      <div class="tile-list">
+        <article class="tile">
+          <img class="image radius" src="assets/img/plant.jpeg" />
+          <p>HERBS</p>
+        </article>
+        <article class="tile">
+          <img class="image radius" src="assets/img/plant.jpeg" />
+          <p>CACTI & SUCCULENTS</p>
+        </article>
+        <article class="tile">
+          <img class="image radius" src="assets/img/plant.jpeg" />
+          <p>INDOOR</p>
+        </article>
+        <article class="tile">
+          <img class="image radius" src="assets/img/plant.jpeg" />
+          <p>ORNAMENTAL</p>
+        </article>
+        <article class="tile">
+          <img class="image radius" src="assets/img/plant.jpeg" />
+          <p>EDIBLE</p>
+        </article>
+        <article class="tile">
+          <img class="image radius" src="assets/img/plant.jpeg" />
+          <p>AIR PIURYFING</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="products">
+      <div id="products-header">
+        <div></div>
+        <div>
+          <div>
+            <label style="display: inline-block" for="include-planeter-select"
+              >Sort by</label
+            >
+            <select id="include-planeter-select">
+              <option>Latest</option>
+              <option>Oldest</option>
+              <option>Cheapest</option>
+              <option>Most expensive</option>
+            </select>
+          </div>
+          <div><b>52</b> Results Found</div>
+        </div>
+      </div>
+      <div id="products-filter">
+        <fieldset>
+          <details open>
+            <summary>All Categories</summary>
+            <ul>
+              <li>
+                <label>
+                  <input type="radio" name="all-categories" />
+                  Herbs <span>(134)</span>
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="radio" name="all-categories" />
+                  Succulents and Cacti <span>(134)</span>
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="radio" name="all-categories" />
+                  Indoor Plants <span>(134)</span>
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="radio" name="all-categories" />
+                  Ornamental Plants <span>(134)</span>
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="radio" name="all-categories" />
+                  Edible Plants <span>(134)</span>
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="radio" name="all-categories" />
+                  Air Purifying Plants <span>(134)</span>
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="radio" name="all-categories" />
+                  Aquatic Plants <span>(134)</span>
+                </label>
+              </li>
+            </ul>
+          </details>
+          <details open>
+            <summary>Care Level</summary>
+            <ul>
+              <li>
+                <label>
+                  <input type="radio" name="other-categories" />
+                  Low (requires minimal care) <span>(134)</span>
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="radio" name="other-categories" />
+                  Medium (requires regular care) <span>(134)</span>
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="radio" name="other-categories" />
+                  High (requires dedicated care) <span>(134)</span>
+                </label>
+              </li>
+            </ul>
+          </details>
+        </fieldset>
+      </div>
+      <div id="products-tiles">
+        <a href="detail.html">
+          <article class="big-tile radius">
+            <img class="default-image" src="assets/img/plant.jpeg" />
+            <div class="big-tile-content">
+              <div>
+                <span>Pekny kvietok</span>
+                <span>$14.99</span>
+              </div>
+              <button class="icon"><img src="assets/shop.svg" /></button>
+            </div></article
+        ></a>
+        <article class="big-tile radius">
+          <img class="default-image" src="assets/img/plant.jpeg" />
+          <div class="big-tile-content">
+            <div>
+              <span>Pekny kvietok</span>
+              <span>$14.99</span>
+            </div>
+            <button class="icon"><img src="assets/shop.svg" /></button>
+          </div>
+        </article>
+        <article class="big-tile radius">
+          <img class="default-image" src="assets/img/plant.jpeg" />
+          <div class="big-tile-content">
+            <div>
+              <span>Pekny kvietok</span>
+              <span>$14.99</span>
+            </div>
+            <button class="icon"><img src="assets/shop.svg" /></button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <footer>Created by Viktoria Bukovska & Hrdlovic</footer>
+  </body>
+</html>
