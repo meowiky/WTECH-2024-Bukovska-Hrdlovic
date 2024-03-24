@@ -70,6 +70,9 @@ nav ul a:visited {
   justify-content: flex-end;
   align-items: center;
 }
+.pseudo-nav a {
+  text-decoration: none;
+}
 
 #menu-thing {
   display: flex;

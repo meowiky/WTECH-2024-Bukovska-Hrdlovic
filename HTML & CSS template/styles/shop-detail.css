@@ -1,87 +1,86 @@
 #shop-detail {
+  display: grid;
+  grid-template-columns: 1fr;
+  padding: 2rem 4rem;
+  gap: 4rem;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  row-gap: 0.75rem;
+}
+.gallery > div {
+  position: relative;
+  cursor: pointer;
+}
+.gallery > div::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(27, 27, 27, 0.1);
+}
+.gallery > div:hover::after {
+  background: transparent;
+}
+
+#shop-detail > .detail {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+#shop-detail > .detail p {
+  padding-top: 1rem;
+  max-width: 40ch;
+}
+.shop-fieldset-actions {
+  display: flex;
+  gap: 1rem;
+  flex-direction: column-reverse;
+}
+
+#details-section h4 {
+  color: rgba(0, 0, 0, 1);
+  font-size: 1.25rem;
+  font-weight: 400;
+}
+#details-section {
+  display: grid;
+  gap: 1rem;
+}
+#details-section-options, 
+#details-section-content {
+    padding: 1rem;
+}
+#details-section-options {
     display: grid;
-    grid-template-columns: 1fr;
-    padding: 2rem 4rem;
-    gap: 4rem;
-  }
-  
-  .gallery {
+    gap: 1rem;
+}
+#details-section-options ul {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.75rem;
-    row-gap: 0.75rem;
-  }
-  .gallery > div {
-    position: relative;
-    cursor: pointer;
-  }
-  .gallery > div::after {
-    content: "";
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: rgba(27, 27, 27, 0.1);
-  }
-  .gallery > div:hover::after {
-    background: transparent;
-  }
-  
-  #shop-detail > .detail {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  
-  #shop-detail > .detail p {
-    padding-top: 1rem;
-    max-width: 40ch;
+    padding-left: 3rem;
+    gap: 1rem;
+}
+#details-section-options ul li {
+    display: block;
+}
+/* DESKTOP :3 */
+@media only screen and (min-width: 756px) {
+  #shop-detail {
+    grid-template-columns: 1fr 1fr;
+    padding: 4rem 8rem;
   }
   .shop-fieldset-actions {
-    display: flex;
-    gap: 1rem;
-    flex-direction: column-reverse;
-  }
-  
-  #details-section h4 {
-    color: rgba(0, 0, 0, 1);
-    font-size: 1.25rem;
-    font-weight: 400;
+    flex-direction: row;
   }
   #details-section {
-    display: grid;
-    gap: 1rem;
+    grid-template-columns: 1fr 3fr;
   }
-  #details-section-options, 
-  #details-section-content {
-      padding: 1rem;
-  }
-  #details-section-options {
-      display: grid;
-      gap: 1rem;
-  }
-  #details-section-options ul {
-      display: grid;
-      padding-left: 3rem;
-      gap: 1rem;
-  }
-  #details-section-options ul li {
-      display: block;
-  }
-  /* DESKTOP :3 */
-  @media only screen and (min-width: 756px) {
-    #shop-detail {
-      grid-template-columns: 1fr 1fr;
-      padding: 4rem 8rem;
-    }
-    .shop-fieldset-actions {
-      flex-direction: row;
-    }
-    #details-section {
-      grid-template-columns: 1fr 3fr;
-    }
-  }
-  
+}

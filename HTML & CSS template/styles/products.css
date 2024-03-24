@@ -1,5 +1,5 @@
 #products {
-display: grid;
+  display: grid;
 }
 #products-tiles {
     display: grid;
@@ -55,15 +55,15 @@ display: grid;
 
 /* DESKTOP :3 */
 @media only screen and (min-width: 756px) {
-#products {
+  #products {
     grid-template-columns: 1fr 4fr;
-}
-#products-tiles {
+  }
+  #products-tiles {
     grid-template-columns: repeat(3, 1fr);
-}
-#products-header {
+  }
+  #products-header {
     grid-column: span 2;
     grid-template-columns: 1fr 4fr;
-}
+  }
 }
   

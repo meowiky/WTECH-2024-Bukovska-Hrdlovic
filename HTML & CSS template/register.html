@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>register</title>
+    <link rel="stylesheet" href="styles/generic.css" />
+    <link rel="stylesheet" href="styles/forms.css" />
+    <link rel="stylesheet" href="styles/navigation.css" />
+    <link rel="stylesheet" href="styles/components.css" />
+    <link rel="stylesheet" href="styles/register.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="pseudo-nav">
+        <a class="white-text">Sign up / Sign In</a>
+      </div>
+      <div class="main-nav">
+        <h1 class="logo inline">PLANTIES</h1>
+        <input type="checkbox" id="hamburger-checkbox" />
+        <label id="hamburger-label" for="hamburger-checkbox"
+          ><span id="hamburger-line"></span
+        ></label>
+        <nav>
+          <ul>
+            <a href="index.html"><li>Home</li></a>
+            <a href="products.html"><li>Products</li></a>
+          </ul>
+          <div id="menu-thing">
+            <div class="relative inline">
+              <input placeholder="Search" class="borderless" />
+              <img src="assets/search.svg" class="input-icon" />
+            </div>
+            <span class="divider"></span>
+            <div class="inline">
+              <div class="relative">
+                <img src="assets/shop.svg" id="shop-icon" />
+                <span class="notification">2</span>
+              </div>
+              <div>
+                <div class="light">Shopping cart:</div>
+                <div class="bold">$57.00</div>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <section class="green">
+      <h1>Create Account</h1>
+    </section>
+
+    <section class="tight centered-content" id="login">
+      <form action="#" class="box-shadow">
+        <h3>Create Account</h3>
+        <input placeholder="Email" type="email" />
+        <input placeholder="Password" type="password"/>
+        <input placeholder="Confirm Password" type="password" />
+        <div id="login-actions">
+          <label>
+            <input type="checkbox" />
+            Accept all terms & Conditions
+          </label>
+        </div>
+        <button type="submit">Create Account</button>
+        <p>
+          Already have an account? <a href="login.html"><b>Login</b></a>
+        </p>
+      </form>
+    </section>
+    <footer>Created by Viktoria Bukovska & Hrdlovic</footer>
+  </body>
+</html>
