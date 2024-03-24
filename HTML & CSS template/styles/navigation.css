@@ -74,6 +74,10 @@ nav ul a:visited {
   text-decoration: none;
 }
 
+.pseudo-nav img {
+  margin-left: 1rem;
+}
+
 #menu-thing {
   display: flex;
   flex-direction: column;
