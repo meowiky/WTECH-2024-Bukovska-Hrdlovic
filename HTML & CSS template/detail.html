@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rastlina // detail</title>
+    <link rel="stylesheet" href="styles/generic.css" />
+    <link rel="stylesheet" href="styles/forms.css" />
+    <link rel="stylesheet" href="styles/navigation.css" />
+    <link rel="stylesheet" href="styles/components.css" />
+    <link rel="stylesheet" href="styles/shop-detail.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="pseudo-nav">
+        <a class="white-text">Sign up / Sign In</a>
+      </div>
+      <div class="main-nav">
+        <h1 class="logo inline">PLANTIES</h1>
+        <input type="checkbox" id="hamburger-checkbox" />
+        <label id="hamburger-label" for="hamburger-checkbox"
+          ><span id="hamburger-line"></span
+        ></label>
+        <nav>
+          <ul>
+            <a href="index.html"><li>Home</li></a>
+            <a href="products.html"><li>Products</li></a>
+          </ul>
+          <div id="menu-thing">
+            <div class="relative inline">
+              <input placeholder="Search" class="borderless" />
+              <img src="assets/search.svg" class="input-icon" />
+            </div>
+            <span class="divider"></span>
+            <div class="inline">
+              <div class="relative">
+                <img src="assets/shop.svg" id="shop-icon" />
+                <span class="notification">2</span>
+              </div>
+              <div>
+                <div class="light">Shopping cart:</div>
+                <div class="bold">$57.00</div>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <section class="green">
+      <h1>Marble Queen pothos</h1>
+    </section>
+
+    <section id="shop-detail">
+      <div class="gallery">
+        <div>
+          <img class="default-image" src="assets/img/plant.jpeg" />
+        </div>
+        <div><img class="default-image" src="assets/img/plant.jpeg" /></div>
+        <div><img class="default-image" src="assets/img/plant.jpeg" /></div>
+        <div><img class="default-image" src="assets/img/plant.jpeg" /></div>
+      </div>
+      <div class="detail">
+        <h2>Marble Queen Pothos</h2>
+        <span>$3,000,000</span>
+        <p>
+          Marble queen pothos is a popular houseplant that is known for its
+          beautiful foliage. It is a relatively easy plant to care for, making
+          it a good choice for beginners.
+        </p>
+        <form action="#">
+          <fieldset>
+            <div>
+              <label for="include-planeter-select">Include planter</label>
+              <select id="include-planeter-select">
+                <option>Yes</option>
+                <option>No</option>
+              </select>
+            </div>
+            <div class="radio-container">
+              <span class="radio-label">Size</span>
+              <div class="radio-options">
+                <label>
+                  <input type="radio" checked name="size" />
+                  <span class="radio-button">S</span>
+                </label>
+                <label>
+                  <input type="radio" name="size" />
+                  <span class="radio-button">M</span>
+                </label>
+                <label>
+                  <input type="radio" name="size" disabled />
+                  <span class="radio-button">L</span>
+                </label>
+              </div>
+            </div>
+            <div class="shop-fieldset-actions">
+              <button class="wide">ADD TO CART</button>
+              <div>
+                <label>Quantity</label>
+                <input type="number" />
+              </div>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </section>
+    <section class="green" id="details-section">
+      <div id="details-section-options">
+        <h4>> Plant care</h4>
+        <ul>
+          <li>Watering</li>
+          <li>Sunlight</li>
+          <li>Soil & Fertilizing</li>
+          <li>Humidity</li>
+          <li>Toxicity</li>
+          <li>Benefits</li>
+        </ul>
+      </div>
+      <div id="details-section-content">
+        <h2>Watering</h2>
+        <p>
+          Marble queen pothos is a relatively drought-tolerant plant, so it is
+          important to avoid overwatering. If you overwater your plant, the
+          leaves will start to yellow and fall off. If you underwater your
+          plant, the leaves will start to wilt.
+        </p>
+        <p>
+          The best way to determine when to water your marble queen pothos is to
+          stick your finger into the soil. If the top inch of soil is dry, it is
+          time to water your plant.
+        </p>
+        <p>
+          When you water your marble queen pothos, water deeply until the water
+          runs out of the drainage holes. This will ensure that the roots are
+          getting enough water.
+        </p>
+      </div>
+    </section>
+    <footer>Created by Viktoria Bukovska & Hrdlovic</footer>
+  </body>
+</html>
