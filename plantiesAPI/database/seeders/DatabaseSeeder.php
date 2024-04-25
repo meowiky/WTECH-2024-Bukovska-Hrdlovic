@@ -2,10 +2,9 @@
 
 namespace Database\Seeders;
 
+// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,6 +13,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        // \App\Models\User::factory(10)->create();
+
+        // \App\Models\User::factory()->create([
+        //     'name' => 'Test User',
+        //     'email' => 'test@example.com',
+        // ]);
+
         $categories = [
             'Herbs', 'Cacti & Succulents', 'Indoor', 'Ornamental',
             'Edible', 'Air Purifying', 'Aquatic', 'Pet Friendly', 'Medicinal Uses'
@@ -24,26 +30,6 @@ class DatabaseSeeder extends Seeder
                 'name' => $category,
             ]);
         }
-
-        $adminEmail = 'admin@example.com';
-
-        DB::table('admins')->insert([
-            'email' => $adminEmail,
-        ]);
-
-        DB::table('customers')->insert([
-            'email' => $adminEmail,
-            'password' => Hash::make('admin'),
-            'first_name' => 'Admin',
-            'last_name' => 'AdminLastname',
-            'street' => 'Admin St',
-            'street_number' => '1A',
-            'city' => 'Admin City',
-            'postal_code' => '12345',
-            'country' => 'Adminland',
-            'state' => 'Adminstate',
-        ]);
-
 
         $categories = DB::table('categories')->pluck('id', 'name');
 

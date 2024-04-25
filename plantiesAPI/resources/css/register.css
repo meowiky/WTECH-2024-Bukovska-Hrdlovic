@@ -1,0 +1,42 @@
+#login > form {
+    padding: 1.5rem;
+    display: grid;
+    justify-content: stretch;
+    align-items: center;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(242, 242, 242, 1);
+    row-gap: 0.75rem;
+    width: 100%;
+    box-shadow: 0px 0px 56px 0px rgba(0, 38, 3, 0.08);
+}
+#login > form > h3,
+#login > form > p,
+#login > form > p a {
+    text-align: center;
+    text-decoration: none;
+}
+#login > form > p {
+    color: rgba(102, 102, 102, 1);
+    font-size: 0.75rem;
+}
+#login-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#login-actions a,
+#login-actions label {
+    color: rgba(102, 102, 102, 1);
+    font-size: 0.75rem;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+
+/* DESKTOP :3 */
+@media only screen and (min-width: 756px) {
+    #login > form {
+        width: 40ch;
+    }
+}

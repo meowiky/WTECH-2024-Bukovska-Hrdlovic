@@ -1,0 +1,111 @@
+.notification {
+  height: 1.275rem;
+  width: 1.275rem;
+  background-color: rgba(80, 128, 107, 1);
+  border-radius: 100%;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 1);
+  font-weight: 500;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: -0.275rem;
+  right: -0.275rem;
+  left: auto;
+  bottom: auto;
+}
+
+.default-image {
+  width: 100%;
+  object-fit: cover;
+}
+.image {
+  width: 100%;
+  object-fit: cover;
+  box-shadow: 0px 8px 23px 0px rgba(80, 107, 82, 0.16);
+}
+
+.tile-list {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(2, 1fr);
+  width: 100%;
+}
+.tile-list.large {
+  grid-template-columns: 1fr;
+  padding: 0 2rem;
+  gap: 2rem;
+  width: 100%;
+}
+.tile-list a {
+  text-decoration: none;
+}
+article.tile {
+  display: grid;
+  min-width: 0;
+  gap: 1.5rem;
+  font-family: "Open Sans", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 22px;
+  letter-spacing: 0.2em;
+  text-align: center;
+  color: rgba(52, 52, 52, 1);
+  justify-content: center;
+}
+
+article.big-tile {
+  border: 1px solid rgba(230, 230, 230, 1);
+  padding: 2rem 2.5rem;
+  display: grid;
+}
+article.big-tile.white {
+  background: white;
+}
+article.big-tile .big-tile-content {
+  display: flex;
+  padding-top: 2rem;
+  justify-content: space-between;
+  align-items: center;
+}
+article.big-tile .big-tile-content > div {
+  display: grid;
+}
+article.big-tile .big-tile-content > div > span:first-child {
+  color: rgba(77, 77, 77, 1);
+  font-weight: 400;
+  font-size: 0.875rem;
+}
+article.big-tile .big-tile-content > div > span:last-child {
+  color: rgba(26, 26, 26, 1);
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+/* DESKTOP :3 */
+@media only screen and (min-width: 756px) {
+  article.tile {
+    font-size: 1rem;
+  }
+  .tile-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .tile-list.large {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* DESKTOP-BIG :3 */
+@media only screen and (min-width: 1024px) {
+  article.tile {
+    font-size: 1rem;
+  }
+  .tile-list {
+    grid-template-columns: repeat(6, 1fr);
+  }
+  .tile-list.large {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

@@ -12,7 +12,7 @@ class Payment extends Model {
         return $this->belongsTo(Order::class);
     }
 
-    public function getCustomer() {
-        return $this->order->customer;
+    public function getUser() {
+        return $this->order->user;
     }
 }
