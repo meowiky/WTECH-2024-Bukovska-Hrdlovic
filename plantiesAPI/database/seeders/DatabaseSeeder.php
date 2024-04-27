@@ -25,9 +25,13 @@ class DatabaseSeeder extends Seeder
             'Edible', 'Air Purifying', 'Aquatic', 'Pet Friendly', 'Medicinal Uses'
         ];
 
+        $currentDateTime = now();
+
         foreach ($categories as $category) {
             DB::table('categories')->insert([
                 'name' => $category,
+                'created_at' => $currentDateTime,
+                'updated_at' => $currentDateTime,
             ]);
         }
 
@@ -141,6 +145,8 @@ class DatabaseSeeder extends Seeder
                 'stock_quantity' => 100,
                 'number_sold' => 0,
                 'image_path' => $product['image_path'],
+                'created_at' => $currentDateTime,
+                'updated_at' => $currentDateTime,
             ]);
 
             foreach ($product['category_names'] as $categoryName) {
