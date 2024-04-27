@@ -40,7 +40,7 @@ class DatabaseSeeder extends Seeder
                 'price' => 5.99,
                 'care_level' => 1,
                 'info' => 'A popular culinary herb known for its sweet aroma and versatility in dishes.',
-                'image_path' => 'public/Product_images/basil_sweet_genovese.png',
+                'image_path' => 'Product_images/basil_sweet_genovese.png',
             ],
             [
                 'name' => 'Aloe Vera',
@@ -48,7 +48,7 @@ class DatabaseSeeder extends Seeder
                 'price' => 12.50,
                 'care_level' => 1,
                 'info' => 'Widely used for skin care and burns, thrives on minimal water.',
-                'image_path' => 'public/Product_images/aloe_vera.png',
+                'image_path' => 'Product_images/aloe_vera.png',
             ],
             [
                 'name' => 'Spider Plant',
@@ -56,7 +56,7 @@ class DatabaseSeeder extends Seeder
                 'price' => 8.99,
                 'care_level' => 1,
                 'info' => 'Excellent at purifying indoor air; very resilient and grows quickly.',
-                'image_path' => 'public/Product_images/spider_plant.png',
+                'image_path' => 'Product_images/spider_plant.png',
             ],
             [
                 'name' => 'Peace Lily',
@@ -64,15 +64,15 @@ class DatabaseSeeder extends Seeder
                 'price' => 15.00,
                 'care_level' => 2,
                 'info' => 'Features lush leaves and white blooms; improves air quality indoors.',
-                'image_path' => 'public/Product_images/peace_lily.png',
+                'image_path' => 'Product_images/peace_lily.png',
             ],
             [
                 'name' => 'Water Lettuce',
                 'category_names' => ['Aquatic', 'Air Purifying'],
                 'price' => 7.00,
-                'care_level' => 2,
+                'care_level' => 3,
                 'info' => 'A floating aquatic plant that purifies water and provides shade for aquatic life.',
-                'image_path' => 'public/Product_images/watter_lettuce.png',
+                'image_path' => 'Product_images/watter_lettuce.png',
             ],
             [
                 'name' => 'Golden Pothos',
@@ -80,7 +80,7 @@ class DatabaseSeeder extends Seeder
                 'price' => 10.00,
                 'care_level' => 1,
                 'info' => 'Hardy vine with attractive heart-shaped leaves, known for its air-purifying capabilities.',
-                'image_path' => 'public/Product_images/golden_pothos.png',
+                'image_path' => 'Product_images/golden_pothos.png',
             ],
             [
                 'name' => 'Chamomile',
@@ -88,7 +88,7 @@ class DatabaseSeeder extends Seeder
                 'price' => 6.50,
                 'care_level' => 2,
                 'info' => 'Produces daisy-like flowers and is commonly used to make calming teas.',
-                'image_path' => 'public/Product_images/chamomile.png',
+                'image_path' => 'Product_images/chamomile.png',
             ],
             [
                 'name' => 'Echeveria',
@@ -96,7 +96,7 @@ class DatabaseSeeder extends Seeder
                 'price' => 9.99,
                 'care_level' => 1,
                 'info' => 'Popular succulent with rosette patterns and minimal watering needs.',
-                'image_path' => 'public/Product_images/echeveria.png',
+                'image_path' => 'Product_images/echeveria.png',
             ],
             [
                 'name' => 'Lavender',
@@ -104,7 +104,7 @@ class DatabaseSeeder extends Seeder
                 'price' => 14.00,
                 'care_level' => 2,
                 'info' => 'Renowned for its soothing fragrance and beautiful purple blooms.',
-                'image_path' => 'public/Product_images/lavender.png',
+                'image_path' => 'Product_images/lavender.png',
             ],
             [
                 'name' => 'Snake Plant',
@@ -112,7 +112,7 @@ class DatabaseSeeder extends Seeder
                 'price' => 20.00,
                 'care_level' => 1,
                 'info' => 'Thrives in low light, requires little water, and removes air toxins effectively.',
-                'image_path' => 'public/Product_images/snake_plant.png',
+                'image_path' => 'Product_images/snake_plant.png',
             ],
             [
                 'name' => 'Mint',
@@ -120,7 +120,7 @@ class DatabaseSeeder extends Seeder
                 'price' => 4.50,
                 'care_level' => 1,
                 'info' => 'Fast-growing herb that can be used in cooking, teas, and more.',
-                'image_path' => 'public/Product_images/mint.png',
+                'image_path' => 'Product_images/mint.png',
             ],
             [
                 'name' => 'Christmas Cactus',
@@ -128,7 +128,7 @@ class DatabaseSeeder extends Seeder
                 'price' => 12.00,
                 'care_level' => 2,
                 'info' => 'Blooms vibrant flowers during the holiday season, non-toxic to pets.',
-                'image_path' => 'public/Product_images/christmas_cactus.png',
+                'image_path' => 'Product_images/christmas_cactus.png',
             ],
         ];
 

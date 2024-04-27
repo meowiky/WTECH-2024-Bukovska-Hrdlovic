@@ -9,7 +9,12 @@
         'resources/css/generic.css',
         'resources/css/forms.css',
         'resources/css/navigation.css',
-        'resources/css/components.css'
+        'resources/css/components.css',
+        'resources/css/app.css',
+        'resources/css/products.css',
+        'resources/css/profile.css',
+        'resources/css/register.css',
+        'resources/css/shop-detail.css'
     ])
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,4 +32,6 @@
 
 </body>
 </html>
+
+@stack('scripts')
 
