@@ -138,3 +138,38 @@ nav ul a:visited {
     justify-self: flex-end;
   }
 }
+
+.cart-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    width: 300px;
+    background-color: #f9f9f9;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.cart-dropdown-content {
+    padding: 10px;
+}
+
+.cart-items {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.cart-total {
+    margin-top: 10px;
+    text-align: right;
+}
+
+.btn-checkout {
+    background-color: rgba(80, 128, 107, 1);
+    color: white;
+    padding: 10px 20px;
+    margin: 10px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+}

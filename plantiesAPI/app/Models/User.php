@@ -57,7 +57,7 @@ class User extends Authenticatable
         return Admin::where('email', $this->email)->exists();
     }
 
-    public function carts()
+    public function cart()
     {
         return $this->hasMany(Cart::class);
     }
