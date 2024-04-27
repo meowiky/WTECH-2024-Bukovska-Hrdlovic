@@ -3,6 +3,9 @@
 @section('title', 'Products')
 
 @section('content')
+    <section class="green">
+        <h1>Shop</h1>
+    </section>
     <section id="products">
         <div id="products-header">
             <div></div>
@@ -54,7 +57,7 @@
 
         <div id="products-tiles">
             @foreach ($products as $product)
-                <a href="{{ url('/') }}">
+                <a href="{{ route('product.show', ['id' => $product->id]) }}">
                     <article class="big-tile radius">
                         <img class="default-image" src="{{ asset($product->image_path) }}" alt="{{ $product->name }}" />
                         <div class="big-tile-content">
