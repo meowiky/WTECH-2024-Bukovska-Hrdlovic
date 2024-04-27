@@ -61,6 +61,7 @@
                     <select name="country">
                         <option value="" disabled selected>Select Country</option>
                         <option value="SK" @if($user->country == 'SK') selected @endif>Slovakia</option>
+                        <option value="CZ" @if($user->country == 'CZ') selected @endif>Czech republic</option>
                     </select>
                     @error('country')
                     <div class="alert alert-danger">{{ $message }}</div>
