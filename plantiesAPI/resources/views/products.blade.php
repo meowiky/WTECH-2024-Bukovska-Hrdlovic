@@ -65,11 +65,17 @@
                                 <span>{{ $product->name }}</span>
                                 <span>${{ number_format($product->price, 2) }}</span>
                             </div>
-                            <button class="icon"><img src="{{ asset('assets/shop.svg') }}" /></button>
+                            <form action="{{ route('cart.add') }}" method="POST" style="display:inline;">
+                                @csrf
+                                <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                <input type="hidden" name="quantity" value="1">
+                                <button type="submit" class="icon"><img src="{{ asset('assets/shop.svg') }}" /></button>
+                            </form>
                         </div>
                     </article>
                 </a>
             @endforeach
+
         </div>
     </section>
 @endsection
@@ -77,6 +83,14 @@
 @push('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.icon').forEach(button => {
+                button.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    this.closest('form').submit();
+                });
+            });
+
             const categoryFilters = document.querySelectorAll('.category-filter');
             let lastCareLevel = null;
             const careLevelFilters = document.querySelectorAll('.care-level-filter');

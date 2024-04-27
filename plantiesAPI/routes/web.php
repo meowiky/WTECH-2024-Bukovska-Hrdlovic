@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -31,6 +32,10 @@ Route::get('/filter-products', [ProductsController::class, 'filterProducts'])->n
 Route::get('/categories/{category}/products', [ProductsController::class, 'showByCategory'])->name('category.products');
 
 Route::get('/products/{id}', [ProductDetailController::class, 'show'])->name('product.show');
+
+// Add this route in web.php
+Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add')->middleware('auth');
+
 
 
 require __DIR__.'/auth.php';

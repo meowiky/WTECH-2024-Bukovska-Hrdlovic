@@ -17,8 +17,9 @@
             <h2>{{ $product->name }}</h2>
             <span>${{ number_format($product->price, 2) }}</span>
             <p>{{ $product->info }}</p>
-            <form action="#" method="POST">
+            <form action="{{ route('cart.add') }}" method="POST">
                 @csrf
+                <input type="hidden" name="product_id" value="{{ $product->id }}" />
                 <fieldset>
                     <div class="shop-fieldset-actions">
                         <button type="submit" class="wide">ADD TO CART</button>
