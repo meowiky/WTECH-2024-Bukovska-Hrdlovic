@@ -23,7 +23,7 @@
         <nav>
             <ul>
                 <a href="{{ url('/') }}"><li>Home</li></a>
-                <a href="{{ url('products') }}"><li>Products</li></a>
+                <a href="{{ route('products') }}"><li>Products</li></a>
             </ul>
             <div id="menu-thing">
                 <div class="relative inline">
