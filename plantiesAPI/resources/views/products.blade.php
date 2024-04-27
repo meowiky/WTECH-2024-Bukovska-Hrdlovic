@@ -77,6 +77,8 @@
             const categoryFilters = document.querySelectorAll('.category-filter');
             let lastCareLevel = null;
             const careLevelFilters = document.querySelectorAll('.care-level-filter');
+            const sorterSelect = document.getElementById('include-planeter-select');
+
             careLevelFilters.forEach(filter => {
                 filter.addEventListener('click', function () {
                     if (this === lastCareLevel) {
@@ -88,6 +90,8 @@
                     updateProducts();
                 });
             });
+
+            sorterSelect.addEventListener('change', updateProducts);
 
             function updateProducts() {
                 let selectedCategories = Array.from(categoryFilters)
@@ -101,6 +105,7 @@
                 if (selectedCareLevel) {
                     queryParams.append('careLevel', selectedCareLevel);
                 }
+                queryParams.append('sort', sorterSelect.value);
 
                 const queryString = queryParams.toString();
 
@@ -115,6 +120,7 @@
 
             categoryFilters.forEach(filter => filter.addEventListener('change', updateProducts));
         });
+
     </script>
 
 @endpush

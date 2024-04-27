@@ -40,9 +40,7 @@ class ProductsController extends Controller
     {
         $categories = $request->input('categories', []);
         $careLevel = $request->input('careLevel');
-        Log::info('Care Level Received: ' . $careLevel);
-        Log::info('Categories Received: ' . implode(', ', $categories));
-
+        $sort = $request->input('sort', 'Latest');  // Default sort
 
         $products = Product::query();
 
@@ -56,13 +54,29 @@ class ProductsController extends Controller
             });
         }
 
-        $filteredProducts = $products->get();
+        switch ($sort) {
+            case 'Latest':
+                $products->orderBy('created_at', 'desc');
+                break;
+            case 'Oldest':
+                $products->orderBy('created_at', 'asc');
+                break;
+            case 'Cheapest':
+                $products->orderBy('price', 'asc');
+                break;
+            case 'Most expensive':
+                $products->orderBy('price', 'desc');
+                break;
+        }
+
+        $products = $products->get();
 
         return response()->json([
-            'html' => view('partials.product_tiles', ['products' => $filteredProducts])->render(),
-            'count' => $filteredProducts->count()
+            'html' => view('partials.product_tiles', compact('products'))->render(),
+            'count' => $products->count()
         ]);
     }
+
 
 
 }
