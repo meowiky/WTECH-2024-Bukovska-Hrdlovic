@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->text('info')->nullable();
             $table->integer('number_sold')->default(0);
-            $table->integer('care_level')->default(0);
+            $table->integer('care_level')->default(1);
             $table->timestamps();
         });
     }

@@ -59,7 +59,7 @@
             @foreach ($products as $product)
                 <a href="{{ route('product.show', ['id' => $product->id]) }}">
                     <article class="big-tile radius">
-                        <img class="default-image" src="{{ asset($product->image_path) }}" alt="{{ $product->name }}" />
+                        <img class="default-image" src="{{ asset('storage/' . $product->image_path) }}" alt="{{ $product->name }}" />
                         <div class="big-tile-content">
                             <div>
                                 <span>{{ $product->name }}</span>

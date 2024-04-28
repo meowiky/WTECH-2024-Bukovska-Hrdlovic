@@ -10,7 +10,7 @@
     <section id="shop-detail">
         <div class="gallery">
             <div>
-                <img class="default-image" src="{{ asset($product->image_path) }}" alt="{{ $product->name }}" />
+                <img class="default-image" src="{{ asset('storage/' . $product->image_path) }}" alt="{{ $product->name }}" />
             </div>
         </div>
         <div class="detail">

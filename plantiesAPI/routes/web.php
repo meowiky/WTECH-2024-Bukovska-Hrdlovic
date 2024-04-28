@@ -1,10 +1,10 @@
 <?php
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\ProductDetailController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProductDetailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,8 +33,16 @@ Route::get('/categories/{category}/products', [ProductsController::class, 'showB
 
 Route::get('/products/{id}', [ProductDetailController::class, 'show'])->name('product.show');
 
-// Add this route in web.php
 Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add')->middleware('auth');
+
+Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
+    Route::get('/dashboard', [App\Http\Controllers\Admin\ProductController::class, 'index'])->name('admin.dashboard');
+    Route::post('/products', [App\Http\Controllers\Admin\ProductController::class, 'store'])->name('admin.products.store');
+    Route::put('/products/{id}', [App\Http\Controllers\Admin\ProductController::class, 'update'])->name('admin.products.update');
+    Route::delete('/products/{id}', [App\Http\Controllers\Admin\ProductController::class, 'destroy'])->name('admin.products.destroy');
+    Route::post('/categories', [App\Http\Controllers\Admin\ProductController::class, 'addCategory'])->name('admin.categories.add');
+    Route::delete('/categories/{id}', [App\Http\Controllers\Admin\ProductController::class, 'removeCategory'])->name('admin.categories.remove');
+});
 
 
 

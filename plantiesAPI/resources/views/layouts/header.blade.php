@@ -5,6 +5,9 @@
                 @csrf
                 <a class="white-text" href="javascript:;" onclick="this.closest('form').submit();">Log out</a>
             </form>
+            @if (auth()->user()->isAdmin())
+                <a class="white-text" href="{{ route('admin.dashboard') }}">Admin Dashboard</a>
+            @endif
         @else
             <a class="white-text" href="{{ route('register') }}">Sign up / Sign In</a>
         @endif
