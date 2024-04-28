@@ -1,6 +1,8 @@
 in your php file find it with `php --ini` uncomment `extension=pdo_pgsql` and `extension=pgsql` (removing the ;)
 `composer install`
+
 `npm install`
+
 `php artisan storage:link` - symbolic link from public/storage to storage/app/public
 
 `php artisan migrate:fresh --seed` - will automatically add categories and products 
@@ -20,4 +22,6 @@ DB_USERNAME=postgres
 DB_PASSWORD=a
 
 ```
+
+also change this line in .env to public `FILESYSTEM_DISK=public`
 
