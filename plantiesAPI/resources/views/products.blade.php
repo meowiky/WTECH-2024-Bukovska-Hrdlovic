@@ -26,6 +26,13 @@
         <div id="products-filter">
             <fieldset>
                 <details open>
+                    <summary>Search</summary>
+                    <div class="relative inline">
+                        <input placeholder="Search" id="filter-search" />
+                        <img src="{{ asset('assets/search.svg') }}" class="input-icon" />
+                    </div>
+                </details>
+                <details open>
                     <summary>All Categories</summary>
                     <ul>
                         @foreach ($categories as $category)
@@ -109,6 +116,7 @@
             document.getElementById('include-planeter-select').addEventListener('change', () => updateProducts());
             document.querySelectorAll('.category-filter').forEach(filter => filter.addEventListener('change', () => updateProducts()));
             document.querySelectorAll('.care-level-filter').forEach(filter => filter.addEventListener('change', () => updateProducts()));
+            document.getElementById('filter-search').addEventListener('input', () => updateProducts());
         }
 
         function updateProducts(page = 1) {
@@ -145,6 +153,11 @@
             document.querySelectorAll('.category-filter:checked').forEach(input => {
                 queryParams.append('categories[]', encodeURIComponent(input.value));
             });
+
+            const searchText = document.getElementById('filter-search').value.trim();
+            if (searchText) {
+                queryParams.set('search', searchText);
+            }
 
             return queryParams;
         }
