@@ -41,6 +41,7 @@ class ProductsController extends Controller
         $categories = $request->input('categories', []);
         $careLevel = $request->input('careLevel');
         $sort = $request->input('sort', 'Latest');  // Default sort
+        $searchText = $request->input('search');
 
         $products = Product::query();
 
@@ -52,6 +53,10 @@ class ProductsController extends Controller
             $products->whereHas('categories', function ($query) use ($categories) {
                 $query->whereIn('categories.id', $categories);
             });
+        }
+
+        if ($searchText) {
+            $products->whereRaw('LOWER(name) LIKE ?', ['%'.strtolower($searchText).'%']);
         }
 
         switch ($sort) {

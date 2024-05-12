@@ -10,6 +10,10 @@
         <div id="products-header">
             <div></div>
             <div>
+                <div class="relative inline">
+                    <input placeholder="Search" id="filter-search" />
+                    <img src="{{ asset('assets/search.svg') }}" class="input-icon" />
+                </div>
                 <div>
                     <label for="include-planeter-select">Sort by</label>
                     <select id="include-planeter-select">
@@ -95,6 +99,7 @@
             let lastCareLevel = null;
             const careLevelFilters = document.querySelectorAll('.care-level-filter');
             const sorterSelect = document.getElementById('include-planeter-select');
+            const searchFilter = document.getElementById('filter-search');
 
             careLevelFilters.forEach(filter => {
                 filter.addEventListener('click', function () {
@@ -109,6 +114,7 @@
             });
 
             sorterSelect.addEventListener('change', updateProducts);
+            searchFilter.addEventListener('change', updateProducts);
 
             function updateProducts() {
                 let selectedCategories = Array.from(categoryFilters)
@@ -123,6 +129,7 @@
                     queryParams.append('careLevel', selectedCareLevel);
                 }
                 queryParams.append('sort', sorterSelect.value);
+                queryParams.append('search', searchFilter.value);
 
                 const queryString = queryParams.toString();
 
