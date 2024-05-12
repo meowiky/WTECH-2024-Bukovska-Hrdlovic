@@ -39,3 +39,144 @@ Vytvorte webovú aplikáciu - eshop, ktorá komplexne rieši nižšie definovan�
 * vytvorenie nového produktu administrátorom cez administrátorské rozhranie
     * produkt musí obsahovať minimálne názov, opis, aspoň 2 fotografie
 * upravenie/vymazanie existujúceho produktu administrátorom cez administrátorské rozhranie
+
+## Aplikácia
+
+Pred prvým spustením aplikácie treba následovať návod v [README.md](PlantiesAPI%2FREADME.md)
+
+Po zbehnutí `php artisan migrate:fresh --seed` sa automaticky do databázy pridá 12 testovacích produktov aj s kategóriami  
+Seeder sa nachádza tu [DatabaseSeeder.php](PlantiesAPI%2Fdatabase%2Fseeders%2FDatabaseSeeder.php)
+
+Authentifikáciu, prihlasovanie a registrácia je pomocou breeze, ktoré sme si upravili podľa našich požiadaviek
+
+## Základný layout stránok a navigácia
+
+[app.blade.php](PlantiesAPI%2Fresources%2Fviews%2Flayouts%2Fapp.blade.php)  
+[footer.blade.php](PlantiesAPI%2Fresources%2Fviews%2Flayouts%2Ffooter.blade.php)  
+[header.blade.php](PlantiesAPI%2Fresources%2Fviews%2Flayouts%2Fheader.blade.php)  
+
+Každá stránka používa tento layout.
+Navigácia obsahuje:
+
+- **Log out:** Toto je odkaz pre odhlásenie, ktorý je aktívny, ak je užívateľ prihlásený. Tento odkaz spustí odoslanie formulára na odhlásenie (`POST` požiadavka).
+- **Admin Dashboard:** Ak je prihlásený užívateľ administrátorom, zobrazí sa odkaz na administračný panel.
+- **Sign up / Sign In:** Ak užívateľ nie je prihlásený, zobrazí sa odkaz na stránku pre registráciu alebo prihlásenie.
+
+- **Logo:** Kliknutím na logo sa užívateľ dostane na úvodnú stránku.
+- **Domovská stránka:** Odkaz na domovskú stránku.
+- **Produkty:** Odkaz na stránku s produktami.
+
+- Pri kliknutí na ikonu košíka sa zobrazí rozbaľovacie menu s aktuálnym obsahom nákupného košíka.
+- **Obsah košíka:** Zobrazuje sa miniaturka produktu, množstvo zakúpeného produktu a jeho cena.
+- **Celková cena:** V spodnej časti rozbaľovacieho menu sa zobrazuje celková cena položiek v košíku.
+- **Checkout:** Tlačidlo, ktoré užívateľa prevedie na stránku pre vykonanie nákupu (checkout).
+
+## Home page
+
+[home.blade.php](PlantiesAPI%2Fresources%2Fviews%2Fhome.blade.php)  
+[HomeController.php](PlantiesAPI%2Fapp%2FHttp%2FControllers%2FHomeController.php)
+
+
+## Register page
+
+[register.blade.php](PlantiesAPI%2Fresources%2Fviews%2Fauth%2Fregister.blade.php)  
+[Auth](PlantiesAPI%2Fapp%2FHttp%2FControllers%2FAuth)
+
+
+## Login page
+
+[login.blade.php](PlantiesAPI%2Fresources%2Fviews%2Fauth%2Flogin.blade.php)  
+[Auth](PlantiesAPI%2Fapp%2FHttp%2FControllers%2FAuth)
+
+## Products page
+
+[products.blade.php](PlantiesAPI%2Fresources%2Fviews%2Fproducts.blade.php)  
+[product_tiles.blade.php](PlantiesAPI%2Fresources%2Fviews%2Fpartials%2Fproduct_tiles.blade.php)  
+[ProductsController.php](PlantiesAPI%2Fapp%2FHttp%2FControllers%2FProductsController.php)
+
+
+### Základné komponenty
+* Filtrovanie podľa kategórií a úrovne starostlivosti: 
+  * Umožňuje používateľom vybrať produkty podľa kategórie alebo úrovne starostlivosti. Filtre sú reprezentované checkboxespre kategórie a radio buttonspre úrovne starostlivosti.
+* Hľadacie pole: 
+  * Umožňuje používateľom hľadať produkty podľa názvu. Výsledky sa aktualizujú v reálnom čase pri zadávaní hľadaného výrazu.
+* Triedenie: 
+  * Používatelia môžu produkty triediť podľa dátumu pridania, ceny a iných kritérií cez dropdown.
+* Paginácia: 
+  * Umožňuje prechádzať medzi stránkami výsledkov.
+* Výpis produktov: 
+  * Zobrazenie produktov je dynamicky aktualizované na základe filtrovania, hľadania a triedenia. Každý produkt má miniaturu, názov, cenu a tlačidlo na pridanie do košíka.
+
+
+* **Backend logika**
+* Filtrácia: 
+  * Produkty sú filtrované na základe kritérií zadaných používateľom, ako sú kategória, úroveň starostlivosti a hľadaný výraz.
+* Triedenie: 
+  * Produkty môžu byť zoradené podľa rôznych kritérií, čo zabezpečuje kontrolu nad tým, ako sú produkty zobrazené.
+* Paginácia: 
+  * Zabezpečuje rozdelenie výsledkov na viaceré stránky.
+
+
+* **Interakcia na klientskej strane (JavaScript)**
+  * Aktualizácia URL a histórie prehliadača: 
+    * Pri každej zmene filtrov alebo triedenia alebo aktuálnej stránky sa URL adresa dynamicky aktualizuje.
+  * Asynchrónne načítavanie: 
+    * Obsah stránky (výpis produktov) je načítavaný asynchrónne bez potreby obnovovania celej stránky.
+  
+
+* **Funkcie skriptu**
+  * updateSortDropdown(): 
+    * Aktualizuje vybranú hodnotu v rozbaľovacom zozname triedenia podľa parametrov URL.
+  * updateSearchField(): 
+    * Obnovuje hľadaný výraz v hľadacom poli pri obnovení stránky alebo pri načítaní s už existujúcimi parametrami URL.
+  * bindEventListeners(): 
+    * Priraďuje udalosti na elementy stránky, aby reagovali na používateľské interakcie ako zmena filtrov alebo zadávanie textu do hľadacieho poľa.
+  * getActiveFilters(): 
+    * Zbiera aktívne filtre a triedenie do objektu URLSearchParams, ktorý sa používa na aktualizáciu obsahu prostredníctvom asynchrónnych požiadaviek.  
+
+## Admin dashboard
+
+[dashboard.blade.php](PlantiesAPI%2Fresources%2Fviews%2Fadmin%2Fdashboard.blade.php)  
+[ProductController.php](PlantiesAPI%2Fapp%2FHttp%2FControllers%2FAdmin%2FProductController.php)
+
+Stránka "Admin Dashboard" slúži na správu produktov v online obchode. Umožňuje administrátorom pridávať, aktualizovať a odstraňovať produkty, ako aj spravovať kategórie, do ktorých sú produkty zaradené.
+
+### Hlavné komponenty stránky:
+1. **Pridanie Nového Produktu**
+  - Formulár umožňuje vložiť názov produktu, cenu, úroveň starostlivosti, množstvo na sklade, popis a obrázok produktu.
+  - Po vyplnení formulára a stlačení tlačidla "Add Product" sa produkt uloží do databázy.
+
+2. **Tabuľka Produktov**
+  - Zobrazuje zoznam všetkých produktov s ich základnými informáciami ako obrázok, názov, cena, úroveň starostlivosti, množstvo na sklade a popis.
+  - Každý produkt v tabuľke má možnosť byť upravený alebo odstránený, a tiež je možné pridávať alebo odoberať kategórie, do ktorých je produkt zaradený.
+
+3. **Úprava a Odstránenie Produktu**
+  - Vedľa každého produktu sú tlačidlá pre úpravu a odstránenie. Tlačidlo pre úpravu otvorí formulár, kde je možné zmeniť informácie o produkte. Tlačidlo pre odstránenie vymaže produkt z databázy.
+  - Pri odstraňovaní produktu sa tiež kontroluje a zmaže obrázok produktu zo servera, ak existuje.
+
+4. **Pridanie a Odobratie Kategórií**
+  - Pre každý produkt je možné pridávať alebo odstraňovať kategórie priamo v tabuľke produktov.
+  - Pridanie kategórie sa realizuje cez malý formulár s textovým poľom a tlačidlom "Add".
+
+5. **Validácia Formulárov**
+  - Všetky formuláre na tejto stránke používajú validáciu na serverovej strane, aby sa zabezpečilo, že všetky vstupy sú správne a úplné predtým, než sú uložené do databázy.
+
+## Product Detail Page
+
+[product_detail.blade.php](PlantiesAPI%2Fresources%2Fviews%2Fproduct_detail.blade.php)  
+[ProductDetailController.php](PlantiesAPI%2Fapp%2FHttp%2FControllers%2FProductDetailController.php)
+
+## Profile page
+
+[profile.blade.php](PlantiesAPI%2Fresources%2Fviews%2Fprofile.blade.php)  
+[ProfileController.php](PlantiesAPI%2Fapp%2FHttp%2FControllers%2FProfileController.php)  
+
+## Cart Page
+
+[cart_page.blade.php](PlantiesAPI%2Fresources%2Fviews%2Fcart_page.blade.php)  
+[CartPageController.php](PlantiesAPI%2Fapp%2FHttp%2FControllers%2FCartPageController.php) 
+
+## Checkout Page
+ 
+[checkout.blade.php](PlantiesAPI%2Fresources%2Fviews%2Fcheckout.blade.php)  
+[CheckoutController.php](PlantiesAPI%2Fapp%2FHttp%2FControllers%2FCheckoutController.php)  
