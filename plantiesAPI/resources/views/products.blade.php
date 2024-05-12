@@ -97,9 +97,8 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             bindEventListeners();
-            setTimeout(function() {
-                updateSortDropdown();
-            }, 100);
+            updateSortDropdown();
+            updateSearchField();
 
         });
 
@@ -109,6 +108,15 @@
             const select = document.getElementById('include-planeter-select');
             if (sort && select) {
                 select.value = sort;
+            }
+        }
+
+        function updateSearchField() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const search = urlParams.get('search');
+            const searchInput = document.getElementById('filter-search');
+            if (search && searchInput) {
+                searchInput.value = search;
             }
         }
 
