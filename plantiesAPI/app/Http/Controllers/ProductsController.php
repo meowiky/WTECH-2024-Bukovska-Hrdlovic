@@ -14,8 +14,7 @@ class ProductsController extends Controller
         $categories = Category::all();
         $categoryIds = $request->input('categories', []);
         $careLevel = $request->input('careLevel');
-        $sort = $request->input('sort', 'Latest');
-
+        $sort = $request->input('sort', 'Latest');  // Default sort
         $searchText = $request->input('search');
 
         $productsQuery = Product::with('categories');

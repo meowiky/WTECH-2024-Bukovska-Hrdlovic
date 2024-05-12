@@ -29,10 +29,6 @@
                 <a href="{{ route('products') }}"><li>Products</li></a>
             </ul>
             <div id="menu-thing">
-                <div class="relative inline">
-                    <input placeholder="Search" class="borderless" />
-                    <img src="{{ asset('assets/search.svg') }}" class="input-icon" />
-                </div>
                 <span class="divider"></span>
                 <div class="inline">
                     <div class="relative" id="cart-container">

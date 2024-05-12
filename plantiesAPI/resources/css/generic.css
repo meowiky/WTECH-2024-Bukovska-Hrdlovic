@@ -80,6 +80,10 @@ h1.logo {
 section.green {
     background-color: rgba(232, 237, 222, 1);
 }
+section.green h1 {
+  font-size: 3.5rem;
+  font-weight: 600;
+}
 section > .header {
     display: flex;
     justify-content:space-between;
