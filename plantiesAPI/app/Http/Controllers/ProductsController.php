@@ -5,17 +5,54 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
-
-
 
 class ProductsController extends Controller
 {
-    public function showProductsPage()
+    public function showProductsPage(Request $request)
     {
         $categories = Category::all();
-        $products = Product::with('categories')->get();
+        $categoryIds = $request->input('categories', []);
+        $careLevel = $request->input('careLevel');
+        $sort = $request->input('sort', 'Latest');  // Default sort
+        $searchText = $request->input('search');
+
+        $productsQuery = Product::with('categories');
+
+        if ($careLevel) {
+            $productsQuery->where('care_level', $careLevel);
+        }
+
+        if (!empty($categoryIds)) {
+            $productsQuery->whereHas('categories', function ($query) use ($categoryIds) {
+                $query->whereIn('categories.id', $categoryIds);
+            });
+        }
+
+        if ($searchText) {
+            $productsQuery->whereRaw('LOWER(name) LIKE ?', ['%' . strtolower($searchText) . '%']);
+        }
+
+        switch ($sort) {
+            case 'Latest':
+                $productsQuery->orderBy('created_at', 'desc');
+                break;
+            case 'Oldest':
+                $productsQuery->orderBy('created_at', 'asc');
+                break;
+            case 'Cheapest':
+                $productsQuery->orderBy('price', 'asc');
+                break;
+            case 'Most expensive':
+                $productsQuery->orderBy('price', 'desc');
+                break;
+        }
+
+        $products = $productsQuery->paginate(9)->appends([
+            'careLevel' => $careLevel,
+            'categories' => $categoryIds,
+            'sort' => $sort
+        ]);
 
         $careLevels = [
             1 => 'Low (requires minimal care)',
@@ -31,57 +68,14 @@ class ProductsController extends Controller
                 return [$level => $count];
             });
 
+        if ($request->ajax()) {
+            return response()->json([
+                'html' => view('partials.product_tiles', compact('products'))->render(),
+                'pagination' => $products->links()->toHtml(),
+                'count' => $products->total()
+            ]);
+        }
+
         return view('products', compact('categories', 'products', 'careLevelCounts', 'careLevels'));
-
     }
-
-
-    public function filterProducts(Request $request)
-    {
-        $categories = $request->input('categories', []);
-        $careLevel = $request->input('careLevel');
-        $sort = $request->input('sort', 'Latest');  // Default sort
-        $searchText = $request->input('search');
-
-        $products = Product::query();
-
-        if ($careLevel) {
-            $products->where('care_level', $careLevel);
-        }
-
-        if (!empty($categories)) {
-            $products->whereHas('categories', function ($query) use ($categories) {
-                $query->whereIn('categories.id', $categories);
-            });
-        }
-
-        if ($searchText) {
-            $products->whereRaw('LOWER(name) LIKE ?', ['%'.strtolower($searchText).'%']);
-        }
-
-        switch ($sort) {
-            case 'Latest':
-                $products->orderBy('created_at', 'desc');
-                break;
-            case 'Oldest':
-                $products->orderBy('created_at', 'asc');
-                break;
-            case 'Cheapest':
-                $products->orderBy('price', 'asc');
-                break;
-            case 'Most expensive':
-                $products->orderBy('price', 'desc');
-                break;
-        }
-
-        $products = $products->get();
-
-        return response()->json([
-            'html' => view('partials.product_tiles', compact('products'))->render(),
-            'count' => $products->count()
-        ]);
-    }
-
-
-
 }

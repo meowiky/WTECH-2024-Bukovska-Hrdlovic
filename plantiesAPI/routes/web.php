@@ -29,8 +29,6 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/products', [ProductsController::class, 'showProductsPage'])->name('products');
-Route::get('/filter-products', [ProductsController::class, 'filterProducts'])->name('filter-products');
-Route::get('/categories/{category}/products', [ProductsController::class, 'showByCategory'])->name('category.products');
 
 Route::get('/products/{id}', [ProductDetailController::class, 'show'])->name('product.show');
 

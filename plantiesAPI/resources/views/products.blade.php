@@ -10,10 +10,6 @@
         <div id="products-header">
             <div></div>
             <div>
-                <div class="relative inline">
-                    <input placeholder="Search" id="filter-search" />
-                    <img src="{{ asset('assets/search.svg') }}" class="input-icon" />
-                </div>
                 <div>
                     <label for="include-planeter-select">Sort by</label>
                     <select id="include-planeter-select">
@@ -23,19 +19,28 @@
                         <option>Most expensive</option>
                     </select>
                 </div>
-                <div><b id="product-count">{{ count($products) }}</b> Results Found</div>
+                <div><b id="product-count">{{ $products->total() }}</b> Results Found</div>
             </div>
         </div>
 
         <div id="products-filter">
             <fieldset>
                 <details open>
+                    <summary>Search</summary>
+                    <div class="relative inline">
+                        <input placeholder="Search" id="filter-search" />
+                        <img src="{{ asset('assets/search.svg') }}" class="input-icon" />
+                    </div>
+                </details>
+                <details open>
                     <summary>All Categories</summary>
                     <ul>
                         @foreach ($categories as $category)
                             <li>
                                 <label>
-                                    <input type="checkbox" name="categories[]" value="{{ $category->id }}" class="category-filter">
+                                    <input type="checkbox" name="categories[]" value="{{ $category->id }}"
+                                           class="category-filter"
+                                        {{ in_array($category->id, request()->input('categories', [])) ? 'checked' : '' }}>
                                     {{ $category->name }} <span>({{ $category->products->count() }})</span>
                                 </label>
                             </li>
@@ -48,8 +53,10 @@
                         @foreach ($careLevels as $id => $description)
                             <li>
                                 <label>
-                                    <input type="radio" name="care-level" value="{{ $id }}" class="care-level-filter"
-                                        {{ isset($careLevelCounts[$id]) ? '' : 'disabled' }}>
+                                    <input type="radio" name="care-level" value="{{ $id }}"
+                                           class="care-level-filter"
+                                        {{ ($id == request()->input('careLevel')) ? 'checked' : '' }}
+                                        {{ !isset($careLevelCounts[$id]) ? 'disabled' : '' }}>
                                     {{ $description }} <span>({{ $careLevelCounts[$id] ?? 0 }})</span>
                                 </label>
                             </li>
@@ -79,73 +86,93 @@
                     </article>
                 </a>
             @endforeach
-
+        </div>
+        <div class="pagination">
+            {!! $products->links() !!}
         </div>
     </section>
 @endsection
 
 @push('scripts')
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            document.querySelectorAll('.icon').forEach(button => {
-                button.addEventListener('click', function(event) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                    this.closest('form').submit();
-                });
-            });
+        document.addEventListener('DOMContentLoaded', function() {
+            bindEventListeners();
+            setTimeout(function() {
+                updateSortDropdown();
+            }, 100);
 
-            const categoryFilters = document.querySelectorAll('.category-filter');
-            let lastCareLevel = null;
-            const careLevelFilters = document.querySelectorAll('.care-level-filter');
-            const sorterSelect = document.getElementById('include-planeter-select');
-            const searchFilter = document.getElementById('filter-search');
+        });
 
-            careLevelFilters.forEach(filter => {
-                filter.addEventListener('click', function () {
-                    if (this === lastCareLevel) {
-                        this.checked = false;
-                        lastCareLevel = null;
-                    } else {
-                        lastCareLevel = this;
-                    }
-                    updateProducts();
-                });
-            });
+        function updateSortDropdown() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const sort = urlParams.get('sort');
+            const select = document.getElementById('include-planeter-select');
+            if (sort && select) {
+                select.value = sort;
+            }
+        }
 
-            sorterSelect.addEventListener('change', updateProducts);
-            searchFilter.addEventListener('change', updateProducts);
+        function bindEventListeners() {
+            document.getElementById('include-planeter-select').addEventListener('change', () => updateProducts());
+            document.querySelectorAll('.category-filter').forEach(filter => filter.addEventListener('change', () => updateProducts()));
+            document.querySelectorAll('.care-level-filter').forEach(filter => filter.addEventListener('change', () => updateProducts()));
+            document.getElementById('filter-search').addEventListener('input', () => updateProducts());
+        }
 
-            function updateProducts() {
-                let selectedCategories = Array.from(categoryFilters)
-                    .filter(input => input.checked)
-                    .map(input => input.value);
+        function updateProducts(page = 1) {
+            const queryParams = getActiveFilters();
+            queryParams.set('page', page.toString());
 
-                let selectedCareLevel = lastCareLevel ? lastCareLevel.value : null;
-
-                const queryParams = new URLSearchParams();
-                selectedCategories.forEach(cat => queryParams.append('categories[]', cat));
-                if (selectedCareLevel) {
-                    queryParams.append('careLevel', selectedCareLevel);
+            history.pushState({}, '', `${location.pathname}?${queryParams.toString()}`);
+            fetch(`/products?${queryParams.toString()}`, {
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
                 }
-                queryParams.append('sort', sorterSelect.value);
-                queryParams.append('search', searchFilter.value);
+            })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('products-tiles').innerHTML = data.html;
+                    document.getElementById('product-count').textContent = `${data.count}`;
+                    document.querySelector('.pagination').innerHTML = data.pagination;
+                    document.getElementById('include-planeter-select').value = queryParams.get('sort');
+                    bindPaginationLinks();
+                })
+                .catch(error => console.error('Error loading the products:', error));
+        }
 
-                const queryString = queryParams.toString();
+        function getActiveFilters() {
+            const queryParams = new URLSearchParams();
+            const sortValue = document.getElementById('include-planeter-select').value;
+            queryParams.set('sort', sortValue);
 
-                fetch(`/filter-products?${queryString}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        document.getElementById('products-tiles').innerHTML = data.html;
-                        document.getElementById('product-count').textContent = data.count;
-                    })
-                    .catch(error => console.error('Error loading the products:', error));
+            const careLevelChecked = document.querySelector('.care-level-filter:checked');
+            if (careLevelChecked) {
+                queryParams.set('careLevel', careLevelChecked.value);
             }
 
-            categoryFilters.forEach(filter => filter.addEventListener('change', updateProducts));
-        });
+            document.querySelectorAll('.category-filter:checked').forEach(input => {
+                queryParams.append('categories[]', encodeURIComponent(input.value));
+            });
+
+            const searchText = document.getElementById('filter-search').value.trim();
+            if (searchText) {
+                queryParams.set('search', searchText);
+            }
+
+            return queryParams;
+        }
+
+        function bindPaginationLinks() {
+            document.querySelectorAll('#products-tiles .pagination a').forEach(link => {
+                link.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const page = parseInt(new URL(this.href).searchParams.get('page'));
+                    const sort = document.getElementById('include-planeter-select').value;
+                    updateProducts(page, sort);
+                });
+            });
+        }
 
     </script>
 
 @endpush
-
