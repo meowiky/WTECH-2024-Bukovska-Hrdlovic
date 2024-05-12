@@ -4,6 +4,8 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductDetailController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CartPageController;
+use App\Http\Controllers\CheckoutController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,7 +35,7 @@ Route::get('/categories/{category}/products', [ProductsController::class, 'showB
 
 Route::get('/products/{id}', [ProductDetailController::class, 'show'])->name('product.show');
 
-Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add')->middleware('auth');
+Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\Admin\ProductController::class, 'index'])->name('admin.dashboard');
@@ -44,6 +46,13 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::delete('/categories/{id}', [App\Http\Controllers\Admin\ProductController::class, 'removeCategory'])->name('admin.categories.remove');
 });
 
+Route::get('/cartpage', [CartPageController::class, 'showCartPage'])->name('cartpage');
+Route::delete('/cartpage', [CartPageController::class, 'remove'])->name('cartpage.remove');
+Route::post('/cartpage/decrement', [CartPageController::class, 'decrementQuantity'])->name('cartpage.decrementQuantity');
+Route::post('/cartpage/increment', [CartPageController::class, 'incrementQuantity'])->name('cartpage.incrementQuantity');
+
+Route::get('/checkout', [CheckoutController::class, 'showCheckoutPage'])->name('checkout');
+Route::post('/checkout', [CheckoutController::class, 'process'])->name('process_checkout');
 
 
 require __DIR__.'/auth.php';

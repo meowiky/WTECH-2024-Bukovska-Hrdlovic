@@ -16,7 +16,8 @@ class CartController extends Controller
             'product_id' => 'required|exists:products,id',
             'quantity' => 'required|integer|min:1'
         ]);
-
+        
+        if (Auth::check()) {
         $cart = Auth::user()->cart()->firstOrCreate();
 
         $product = Product::findOrFail($request->product_id);
@@ -31,6 +32,26 @@ class CartController extends Controller
             $cart->products()->attach($product->id, ['quantity' => $request->quantity]);
         }
 
+        } else {
+            // User is not authenticated, use session to store cart
+            $cartItems = session()->get('cartItems', collect());
+            $product = Product::findOrFail($request->product_id);
+            $existingCartItem = $cartItems->where('product_id', $request->product_id)->first();
+            if ($existingCartItem) {
+                // Increment the quantity of the existing product
+                $existingCartItem['quantity'] += $request->quantity;
+            } else {
+                // Add the new product to the cart
+                $cartItem = [
+                    'product_id' => $product->id,
+                    'quantity' => (int)$request->quantity,
+                    'name' => $product->name,
+                    'price' => (float)$product->price
+                ];
+                $cartItems->push($cartItem);
+            }
+            session()->put('cartItems', $cartItems);
+        }
         Log::info('adding to cart');
 
         if ($request->expectsJson()) {

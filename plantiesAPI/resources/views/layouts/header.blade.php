@@ -52,7 +52,7 @@
             <div class="cart-items">
                 @foreach ($cartItems as $item)
                 <div class="cart-item">
-                    <img src="{{ asset($item['image_path']) }}" alt="{{ $item['name'] }}" class="cart-item-image" />
+                    <img src="{{ asset('storage/' . $item['image_path']) }}" alt="{{ $item['name'] }}" class="cart-item-image" />
                     <div class="cart-item-details">
                         <div class="cart-item-name">{{ $item['name'] }}</div>
                         <div class="cart-item-quantity">{{ $item['quantity'] }} x ${{ number_format($item['price'], 2) }}</div>
@@ -64,7 +64,9 @@
             <div class="cart-total">
                 Total: <span class="total-price">${{ number_format($totalPrice, 2) }}</span>
             </div>
-            <button class="btn-checkout" onclick="checkout()">Checkout</button>
+            <form action="{{ route('cartpage') }}" method="GET">
+                <button type="submit" class="btn-checkout">Checkout</button>
+            </form>
         </div>
     </div>
 

@@ -163,6 +163,11 @@ nav ul a:visited {
     text-align: right;
 }
 
+.cart-item-image {
+  width: 100%; 
+  height: auto; 
+}
+
 .btn-checkout {
     background-color: rgba(80, 128, 107, 1);
     color: white;
@@ -172,4 +177,16 @@ nav ul a:visited {
     cursor: pointer;
     width: 100%;
     text-align: center;
+}
+
+.btn-checkout-cart {
+  background-color: rgba(80, 128, 107, 1);
+  color: white;
+  padding: 10px 20px;
+  margin: 10px 0;
+  border: none;
+  cursor: pointer;
+  width: 30%;
+  text-align: center;
+  float: right;
 }

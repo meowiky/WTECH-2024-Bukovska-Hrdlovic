@@ -75,11 +75,11 @@
                     @enderror
                 </div>
             </div>
-            <button type="submit">Save Changes</button>
+            <button type="submit" class="btn-checkout">Save Changes</button>
         </form>
     </section>
-    <section class="change-password-section">
-        <form id="change-password-form" method="POST" action="{{ route('password.update') }}" class="form-container">
+    <section>
+        <form id="billing-form" method="POST" action="{{ route('password.update') }}" class="form-container">
             @csrf
             <input type="hidden" name="_method" value="PUT">
 
@@ -110,7 +110,7 @@
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-primary">Change Password</button>
+            <button type="submit" class="btn-checkout">Change Password</button>
         </form>
     </section>
 

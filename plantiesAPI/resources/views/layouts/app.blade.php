@@ -14,7 +14,8 @@
         'resources/css/products.css',
         'resources/css/profile.css',
         'resources/css/register.css',
-        'resources/css/shop-detail.css'
+        'resources/css/shop-detail.css',
+        'resources/css/cart.css'
     ])
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
