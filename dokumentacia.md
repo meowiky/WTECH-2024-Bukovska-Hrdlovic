@@ -60,14 +60,15 @@ Navigácia obsahuje:
 
 - **Log out:** Toto je odkaz pre odhlásenie, ktorý je aktívny, ak je užívateľ prihlásený. Tento odkaz spustí odoslanie formulára na odhlásenie (`POST` požiadavka).
 - **Admin Dashboard:** Ak je prihlásený užívateľ administrátorom, zobrazí sa odkaz na administračný panel.
-- **Sign up / Sign In:** Ak užívateľ nie je prihlásený, zobrazí sa odkaz na stránku pre registráciu alebo prihlásenie.
+- **Sign up / Sign In:** Ak užívateľ nie je prihlásený, zobrazí sa odkaz na stránku pre registráciu kde sa dá prekliknúť na prihlásenie
+- **Profile icon** Ak je používateľ prihlásený zobrazí sa stránka profilu, ak nie je, zobrazí sa login page
 
 - **Logo:** Kliknutím na logo sa užívateľ dostane na úvodnú stránku.
 - **Domovská stránka:** Odkaz na domovskú stránku.
 - **Produkty:** Odkaz na stránku s produktami.
 
 - Pri kliknutí na ikonu košíka sa zobrazí rozbaľovacie menu s aktuálnym obsahom nákupného košíka.
-- **Obsah košíka:** Zobrazuje sa miniaturka produktu, množstvo zakúpeného produktu a jeho cena.
+- **Obsah košíka:** Zobrazuje sa miniaturka produktu, množstvo zakúpeného produktu a jeho cena. ([CartController.php](PlantiesAPI%2Fapp%2FHttp%2FControllers%2FCartController.php) )
 - **Celková cena:** V spodnej časti rozbaľovacieho menu sa zobrazuje celková cena položiek v košíku.
 - **Checkout:** Tlačidlo, ktoré užívateľa prevedie na stránku pre vykonanie nákupu (checkout).
 
@@ -76,17 +77,38 @@ Navigácia obsahuje:
 [home.blade.php](PlantiesAPI%2Fresources%2Fviews%2Fhome.blade.php)  
 [HomeController.php](PlantiesAPI%2Fapp%2FHttp%2FControllers%2FHomeController.php)
 
+Domovská stránka obsahuje nedávno pridané produkty
+
 
 ## Register page
 
 [register.blade.php](PlantiesAPI%2Fresources%2Fviews%2Fauth%2Fregister.blade.php)  
 [Auth](PlantiesAPI%2Fapp%2FHttp%2FControllers%2FAuth)
 
+### Formulár na Registráciu
+- **Formulár**:
+  - **Email**: Pole s placeholderom "Email"
+  - **Heslo**: Pole s placeholderom "Password"
+  - **Potvrdenie Hesla**: Druhé pole na heslo s placeholderom "Confirm Password", kde používatelia potvrdia zadané heslo.
+- Každé pole na vstup dát má v prípade chyby pri zadávaní pripravené zobrazenie chybovej správy, ktorá informuje používateľa o probléme
+
+
+- **Link na Prihlásenie**: Pre používateľov, ktorí už účet majú, je na formulári link "Login" (Prihlásiť sa), ktorý ich presmeruje na prihlasovaciu stránku.
 
 ## Login page
 
 [login.blade.php](PlantiesAPI%2Fresources%2Fviews%2Fauth%2Flogin.blade.php)  
 [Auth](PlantiesAPI%2Fapp%2FHttp%2FControllers%2FAuth)
+
+### Formulár na Prihlásenie
+- **Formulár**:
+  - **Email**: Pole s placeholderom "Email"
+  - **Heslo**: Pole s placeholderom "Password"
+- Každé pole na vstup dát má v prípade chyby pri zadávaní pripravené zobrazenie chybovej správy, ktorá informuje používateľa o probléme (napr. neplatný formát emailu, nesprávne heslo atď.).
+
+Remember me a Forgot your password? niesú implementované
+- odkaz na registráciu
+
 
 ## Products page
 
@@ -166,10 +188,36 @@ Stránka "Admin Dashboard" slúži na správu produktov v online obchode. Umož�
 [product_detail.blade.php](PlantiesAPI%2Fresources%2Fviews%2Fproduct_detail.blade.php)  
 [ProductDetailController.php](PlantiesAPI%2Fapp%2FHttp%2FControllers%2FProductDetailController.php)
 
+
+### Detail Produktu
+- **Názov produktu** 
+- **Cena produktu**
+- **Popis produktu**
+- **Obrázok produktu**
+- **Formulár na pridanie do košíka** umožňuje užívateľom vybrať množstvo produktu, ktoré chcú kúpiť, a pridať ho do košíka. Formulár obsahuje skryté pole s ID produktu, pole pre množstvo s predvolenou hodnotou 1 a tlačidlo na pridanie produktu do košíka.
+
 ## Profile page
 
 [profile.blade.php](PlantiesAPI%2Fresources%2Fviews%2Fprofile.blade.php)  
-[ProfileController.php](PlantiesAPI%2Fapp%2FHttp%2FControllers%2FProfileController.php)  
+[ProfileController.php](PlantiesAPI%2Fapp%2FHttp%2FControllers%2FProfileController.php)
+
+Na túto stránku sa dostane len prihlásený používateľ, ak pouýívateľ nie je prihlásený presmeruje ho to na prihlasovaciu stránku
+
+Stránka obsahuje dve hlavné sekcie:
+
+### Fakturačná adresa
+
+- **Hlavný formulár** umožňuje užívateľovi aktualizovať svoju fakturačnú adresu a osobné informácie.
+- Polia formulára zahŕňajú meno, priezvisko, adresu, mesto, štát, poštové smerovacie číslo a krajinu.
+- Všetky polia sú vyžadované a obsahujú validácie, ktoré pri chybe zobrazujú upozornenie.
+- Formulár obsahuje tlačidlo na uloženie zmien, ktoré odosiela dáta na server na spracovanie.
+
+### Zmena hesla
+
+- **Formulár pre zmenu hesla** 
+- Užívateľ musí zadať súčasné heslo, nové heslo a potvrdiť nové heslo.
+- Aj tu sú prítomné validácie a pri neúspešnej validácii sa zobrazujú chybové hlášky.
+
 
 ## Cart Page
 
