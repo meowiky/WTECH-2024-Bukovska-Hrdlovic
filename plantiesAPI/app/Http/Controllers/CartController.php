@@ -42,11 +42,14 @@ class CartController extends Controller
                 $existingCartItem['quantity'] += $request->quantity;
             } else {
                 // Add the new product to the cart
+                $subtotal = (float)$product->price * (int)$request->quantity;
                 $cartItem = [
                     'product_id' => $product->id,
                     'quantity' => (int)$request->quantity,
                     'name' => $product->name,
-                    'price' => (float)$product->price
+                    'price' => (float)$product->price,
+                    'image_path' => $product->image_path,
+                    'subtotal'=> $subtotal,
                 ];
                 $cartItems->push($cartItem);
             }

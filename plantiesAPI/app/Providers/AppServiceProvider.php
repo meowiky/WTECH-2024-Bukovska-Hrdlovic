@@ -21,6 +21,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         View::composer('layouts.header', function ($view) {
+            
             $cartItems = collect([]);
             $totalPrice = 0.00;
 
@@ -41,6 +42,17 @@ class AppServiceProvider extends ServiceProvider
 
                     $totalPrice = $cartItems->sum('subtotal');
                 }
+            } else {
+                $cartItems = session()->get('cartItems');
+                $totalPrice = 0;
+                if($cartItems){
+                    foreach ($cartItems as $product) {
+                        $totalPrice += (float)$product['price'] * (float)$product['quantity'];
+                    }
+                } else {
+                    $cartItems = collect([]);
+                }
+
             }
 
         $view->with(compact('cartItems', 'totalPrice'));
