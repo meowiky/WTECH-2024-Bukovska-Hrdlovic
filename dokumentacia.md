@@ -40,6 +40,19 @@ Vytvorte webovú aplikáciu - eshop, ktorá komplexne rieši nižšie definovan�
     * produkt musí obsahovať minimálne názov, opis, aspoň 2 fotografie
 * upravenie/vymazanie existujúceho produktu administrátorom cez administrátorské rozhranie
 
+
+## Diagram fyzického dátového modelu
+
+![](databasediagram.png)
+
+**Zmeny oproti prvej prvej fázy**
+* Odstránenie hodnoty status z tabulky Carts. Pri implementácií sme nenašli sme žiadne využitie.
+* Odstránenie hodnoty category_id z tabulky Products. Nepotrebné, Products a Categories sú prepojené pomocou tabulky Product_categories.
+* Pridanie timestampov created_at a updated_at do väčšiny tabuliek.
+
+## Programovacie prostredie
+Pre prácu bolo použité programovacie prostredie VisualStudio Code.
+
 ## Aplikácia
 
 Pred prvým spustením aplikácie treba následovať návod v [README.md](PlantiesAPI%2FREADME.md)
@@ -154,7 +167,7 @@ Remember me a Forgot your password? niesú implementované
   * bindEventListeners(): 
     * Priraďuje udalosti na elementy stránky, aby reagovali na používateľské interakcie ako zmena filtrov alebo zadávanie textu do hľadacieho poľa.
   * getActiveFilters(): 
-    * Zbiera aktívne filtre a triedenie do objektu URLSearchParams, ktorý sa používa na aktualizáciu obsahu prostredníctvom asynchrónnych požiadaviek.  
+    * Zbiera aktívne filtre a triedenie do objektu URLSearchParams, ktorý sa používa na aktualizáciu obsahu prostredníctvom asynchrónnych požiadaviek.
 
 ## Admin dashboard
 
@@ -224,7 +237,22 @@ Stránka obsahuje dve hlavné sekcie:
 [cart_page.blade.php](PlantiesAPI%2Fresources%2Fviews%2Fcart_page.blade.php)  
 [CartPageController.php](PlantiesAPI%2Fapp%2FHttp%2FControllers%2FCartPageController.php) 
 
+### Tabuľka s obsahom košíka:
+
+- Názov produktu
+- Cena a celková cena produktu
+- Množstvo daného tovaru v košíku a možnost zmeniť množstvo tovaru v košíku
+- Možnosť odstrániť produkt z košíka
+
 ## Checkout Page
  
 [checkout.blade.php](PlantiesAPI%2Fresources%2Fviews%2Fcheckout.blade.php)  
 [CheckoutController.php](PlantiesAPI%2Fapp%2FHttp%2FControllers%2FCheckoutController.php)  
+
+### Formulár informácií na vytvorenie objednávky
+
+- Polia formulára zahŕňajú meno, priezvisko, adresu, mesto, štát, poštové smerovacie číslo a krajinu.
+- Všetky polia sú vyžadované a obsahujú validácie, ktoré pri chybe zobrazujú upozornenie.
+- Polia sú vypísané pre prihlásených uživateľov podľa toho ako si nastavie informácie v profile.
+- Možnosť výberu spôsobu platby
+- Malá tabulka s obsahom košíka
